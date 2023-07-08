@@ -24,7 +24,7 @@ export default function CountryBox(props) {
     var totalOffsetMinutes = offsetMinutes + desiredOffsetMinutes;
 
     if (isNaN(totalOffsetMinutes)) {
-      return "No time available";
+      return "";
     } else {
       var offsetMilliseconds = totalOffsetMinutes * 60 * 1000;
 
@@ -48,39 +48,25 @@ export default function CountryBox(props) {
 
       var monthNames = [
         "January",
-
         "February",
-
         "March",
-
         "April",
-
         "May",
-
         "June",
-
         "July",
-
         "August",
-
         "September",
-
         "October",
-
         "November",
-
         "December",
       ];
 
       var convertedMonth = monthNames[convertedMonthIndex];
 
-      // Extract the hour and minute from the converted time
 
       var convertedHour = ("0" + convertedTime.getHours()).slice(-2);
 
       var convertedMinute = ("0" + convertedTime.getMinutes()).slice(-2);
-
-      // Display the converted date and time in the desired format
 
       var convertedDateTime =
         formattedDate +
@@ -92,11 +78,7 @@ export default function CountryBox(props) {
         convertedHour +
         ":" +
         convertedMinute;
-
       return convertedDateTime;
-
-      // Helper function to get the suffix for the date
-
       function getNumberWithSuffix(number) {
         var suffix = "th";
 
@@ -119,7 +101,9 @@ export default function CountryBox(props) {
   return (
     <div className="box">
       <div className="img-box">
+      <div className="img-fluid p-1 ">
         <img src={countryData.flags.svg} className="countryboximage" alt="" />
+        </div>
       </div>
       <div className="country-info">
         <h6>{countryData?.name?.common}</h6>

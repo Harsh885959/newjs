@@ -1,4 +1,4 @@
-  import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Router from "next/router";
 export async function getServerSideProps(context) {
   const id = context.query.id;
@@ -15,7 +15,6 @@ export async function getServerSideProps(context) {
       id: id || null,
       data: data || null,
       data2: data2 || null,
-
     },
   };
 }
@@ -35,8 +34,6 @@ const Details = (props) => {
 
   const fetchCountryData = async (id) => {
     try {
-      
-
       const neighbourCountry = [];
 
       props?.data[0]?.borders?.map((elem) => {
@@ -46,8 +43,6 @@ const Details = (props) => {
           neighbourCountry?.push(obj[0]);
         }
       });
-
-     
 
       setNeighbourCountryData(neighbourCountry);
 
@@ -73,27 +68,26 @@ const Details = (props) => {
                     countryData.flags.png && (
                       <img
                         src={countryData.flags.png}
-                        className="detail-img  "
+                        className="detail-img img-fluid "
                         alt=""
                       />
                     )}
                 </div>
-                <div className="col-lg-5 col-11 mt-0 country-all">
-                  
-                  <p className="mt-3">Capital: {countryData?.capital}</p>
+                <div className="col-lg-6 col-11 mx-20  display-grid country-all">
+                  <p>
+                    Native Name:{" "}
+                    {countryData?.name.nativeName
+                      ? Object.values(countryData?.name?.nativeName)[0].common
+                      : "-"}
+                  </p>
 
+                  <p>Capital: {countryData?.capital}</p>
                   <p>Population: {countryData?.population}</p>
-
                   <p>Region: {countryData?.region}</p>
-
                   {console.log(countryData, "Country Data")}
-
                   <p>Subregion: {countryData?.subregion}</p>
-
                   <p>Area: {countryData?.area} km²</p>
-
                   <p>Country Code: {countryData?.cca2}</p>
-
                   <p>
                     Languages:{" "}
                     {countryData?.languages
@@ -103,7 +97,9 @@ const Details = (props) => {
 
                   <p>
                     Currencies:{" "}
-                    {countryData?.currencies? Object.values(countryData.currencies)[0].name  : "-"}
+                    {countryData?.currencies
+                      ? Object.values(countryData.currencies)[0].name
+                      : "-"}
                   </p>
 
                   <p>
@@ -124,17 +120,23 @@ const Details = (props) => {
         <div className="row">
           <div className="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
           <div className="col-lg-10 col-md-10 col-sm-10 col-xs-10">
-            <div>
-              <h4>Neighbour Countries</h4>
-
-              <div className="row my-2 mx-2  border border-lightdark">
-                <div className=" my-1 d-flex flex-wrap justify-content-between">
-                  {neighbourCountryData?.map((elem) => {
-                    return (
-                      <img src={elem?.flags?.png} className="neighbour-country-img mt-2" alt="" />
-                    );
-                  })}
-                </div>
+            {/* <h4>Neighbour Countries</h4> */}
+            <br />
+            <div className="row my-2 mx-  border border-lightdark">
+            
+              <h4><br/>Neighbour Countries</h4>
+              <br />
+              <div className="my-2 d-flex flex-wrap justify-content-between align-items-center">
+                {/* <h4>Neighbour Countries</h4> */}
+                {neighbourCountryData?.map((elem) => {
+                  return (
+                    <img
+                      src={elem?.flags?.png}
+                      className="neighbour-country-img img-fluid "
+                      alt=""
+                    />
+                  );
+                })}
               </div>
             </div>
           </div>
